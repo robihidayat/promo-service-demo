@@ -1,0 +1,31 @@
+version: '3'
+services:
+  promo-services:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: promo-services
+    image: promo-services
+    environment:
+      - CONTAINER_ENV=dev
+    ports:
+      - "8080:8080"
+    networks:
+      - beckend
+
+  database-promo:
+    image: postgres:9.4
+    container_name: database-promo
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - beckend
+    ports:
+      - "5432:5432"
+
+
+
+networks:
+  beckend:
